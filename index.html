@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Pokedéx</title>
+</head>
+    <body>
+
+        <h1>POKEMON BRABO Pokedéx</h1>
+
+        <div class="poke_list" id="poke_list">
+ 
+        </div>
+
+        <script>
+            let lista_pokemon = document.getElementById("poke_list")
+            
+            function getPokemonInfo(poke_n){
+                fetch('https://pokeapi.co/api/v2/pokemon/' + poke_n)
+                .then(function (response) {
+                    response.json()
+                    .then(function (pokemon) {
+                        createPokemon(pokemon, poke_n)
+                    })
+                })
+            }
+            
+            var pokemons_number = 493
+            //for(var i = 1; i++; i< 4){
+                
+            const fetchPokemons = async () => {
+	            for (let i = 1; i <= pokemons_number; i++) {
+		            await getPokemonInfo(i);
+	            }
+            }
+                
+            
+            function createPokemon(pokemon, poke_n){
+                let poke_card = document.createElement('div')
+                poke_card.classList.add('pokecard')
+
+
+                pokeinnerHtml = `
+                <div id="pokemon-${poke_n}">
+                    <img src="" alt="">
+                    <p></p>
+                    <p>asdasdas</p>
+                </div>
+                `
+
+                poke_card.innerHTML = pokeinnerHtml
+                lista_pokemon.appendChild(poke_card)
+
+                let pkm = lista_pokemon.querySelector("#pokemon-"+ poke_n)
+
+                let poke_img = pkm.getElementsByTagName("img")[0]
+                poke_img.setAttribute("src", pokemon.sprites.front_default)
+
+                let poke_name = pkm.getElementsByTagName("p")[0]
+                poke_name.textContent = pokemon.name
+
+                pkm.getElementsByTagName("p")[1].textContent = `#${poke_n}`
+
+                
+            }
+
+            fetchPokemons()
+        </script>
+    
+    </body>
+</html>

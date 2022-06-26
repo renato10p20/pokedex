@@ -1,0 +1,37 @@
+body{
+    background-color: azure;
+}
+
+.poke_list{
+    position:absolute;
+    display: grid ;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+    height: 1000px;
+
+    justify-items: center;
+    align-items: center;
+    
+    
+}
+
+.pokecard{
+    width: 250px;
+    height: 200px;
+    margin: 2px;
+
+    border: 5px solid;
+    border-color: aqua;
+    border-radius: 50px;
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.pokecard p{
+    text-align: center;
+}
+
+
+
