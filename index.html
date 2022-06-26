@@ -5,11 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reset.css">
     <title>Pokedéx</title>
 </head>
     <body>
 
-        <h1>POKEMON BRABO Pokedéx</h1>
+        <div class="pokelogo">
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pokémon_logo.svg/1200px-International_Pokémon_logo.svg.png" alt="">
+        </div>
 
         <div class="poke_list" id="poke_list">
  
@@ -18,27 +22,30 @@
         <script>
             let lista_pokemon = document.getElementById("poke_list")
             
-            function getPokemonInfo(poke_n){
+            async function getPokemonInfo(poke_n){
                 fetch('https://pokeapi.co/api/v2/pokemon/' + poke_n)
                 .then(function (response) {
                     response.json()
                     .then(function (pokemon) {
-                        createPokemon(pokemon, poke_n)
+                        
+                       createPokemon(pokemon, poke_n)
                     })
                 })
             }
             
             var pokemons_number = 493
+
             //for(var i = 1; i++; i< 4){
                 
             const fetchPokemons = async () => {
+
 	            for (let i = 1; i <= pokemons_number; i++) {
-		            await getPokemonInfo(i);
+		            getPokemonInfo(i)
 	            }
             }
                 
             
-            function createPokemon(pokemon, poke_n){
+            async function createPokemon(pokemon, poke_n){
                 let poke_card = document.createElement('div')
                 poke_card.classList.add('pokecard')
 
@@ -46,8 +53,9 @@
                 pokeinnerHtml = `
                 <div id="pokemon-${poke_n}">
                     <img src="" alt="">
-                    <p></p>
-                    <p>asdasdas</p>
+                    <p class="name"></p>
+                    <p class="num"></p>
+                    <p class="type"></p>
                 </div>
                 `
 
@@ -57,12 +65,15 @@
                 let pkm = lista_pokemon.querySelector("#pokemon-"+ poke_n)
 
                 let poke_img = pkm.getElementsByTagName("img")[0]
-                poke_img.setAttribute("src", pokemon.sprites.front_default)
+                poke_img.setAttribute("src", await pokemon.sprites.front_default)
 
                 let poke_name = pkm.getElementsByTagName("p")[0]
-                poke_name.textContent = pokemon.name
+                poke_name.textContent = await pokemon.name
 
                 pkm.getElementsByTagName("p")[1].textContent = `#${poke_n}`
+
+                let poke_type = pkm.getElementsByTagName("p")[2]
+                poke_type.textContent = pokemon.types.map(typeInfo => typeInfo.type.name)
 
                 
             }

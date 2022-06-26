@@ -1,7 +1,23 @@
 body{
-    background-color: azure;
+    background-color: rgb(17,190,222);
 }
 
+.pokelogo{
+    width: 100%;
+    display: flex;
+
+    align-content: center;
+    justify-content: center;
+
+    margin-bottom: 50px;
+}
+
+.pokelogo img{
+    width: 40%;
+    height: 40%;
+    margin: 0;
+    
+}
 .poke_list{
     position:absolute;
     display: grid ;
@@ -16,22 +32,43 @@ body{
 }
 
 .pokecard{
+    background-image: radial-gradient(circle, rgba(25,125,211,0) 30%, rgba(25,125,211,0.5) 60%, rgba(25,125,211,1));
     width: 250px;
-    height: 200px;
+    height: 250px;
     margin: 2px;
 
-    border: 5px solid;
-    border-color: aqua;
-    border-radius: 50px;
+    border: 1px solid;
+    border-color: aliceblue;
+
+    border-radius: 50%/50px;
+    
 
     display: flex;
     justify-content: center;
+    align-content: center;
+
+    color: aliceblue;
+    text-transform: uppercase;
 
 }
+
 
 .pokecard p{
     text-align: center;
+    margin: 0;
 }
 
+.pokecard img{
+    width: 150px;
+    height: 150px;
+
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+
+.type{
+    background-color: red;
+    border-radius: 50px;
+}
 
 
